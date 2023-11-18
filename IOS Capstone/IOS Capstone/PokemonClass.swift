@@ -6,13 +6,17 @@
 //
 
 import Foundation
-struct Pokemon: Codable {
-    let pokemon: Int
-    let stat: String
-    let type: String
-    let region: String
+
+struct PokemonResponse: Codable {
+    let pokemon: [Pokemon]
 }
 
-struct UserResponse: Codable {
-    let data: [Pokemon]
+struct Pokemon: Codable {
+    //let moves: Move?
+   let types: String?
+}
+
+struct Move: Codable {
+    let move: String?
+    let name: String?
 }

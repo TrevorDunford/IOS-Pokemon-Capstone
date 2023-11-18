@@ -10,12 +10,6 @@ import UIKit
 
 class PokemonViewController: UIViewController, UITableViewDataSource, NetworkManagerDelegate, UITableViewDelegate {
     
-    
-    
-
-    
-
-    
     @IBOutlet weak var pokemonList: UITableView!
     
     override func viewDidLoad() {
@@ -25,6 +19,8 @@ class PokemonViewController: UIViewController, UITableViewDataSource, NetworkMan
     }
 
     var pokemon: [Pokemon] = []
+    
+    var pokemons = [String]()
     
     func getPokemon() {
         NetworkManager.shared.getPokemon()
@@ -53,7 +49,7 @@ class PokemonViewController: UIViewController, UITableViewDataSource, NetworkMan
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.PokemonReuseID, for: indexPath)
-        let categories = categories[indexPath.row]
+        let categories = pokemons[indexPath.row]
         var content = cell.defaultContentConfiguration()
         content.text = categories
         cell.contentConfiguration = content
@@ -61,8 +57,8 @@ class PokemonViewController: UIViewController, UITableViewDataSource, NetworkMan
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             tableView.deselectRow(at: indexPath, animated: true)
-        let expenseVC = storyboard!.instantiateViewController(withIdentifier: "ExpensesViewController")
-            self.navigationController?.pushViewController(expenseVC, animated: true)
+        let statsVC = storyboard!.instantiateViewController(withIdentifier: "StatsViewController")
+            self.navigationController?.pushViewController(statsVC, animated: true)
 
         }
     

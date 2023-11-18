@@ -18,7 +18,7 @@ class NetworkManager {
     var delegate: NetworkManagerDelegate?
                                                   
     func getPokemon() {
-        let endpoint = baseUrl + "users"
+        let endpoint = baseUrl + "pokemon/ditto"
         
         guard let url = URL(string: endpoint) else {
             return
@@ -40,10 +40,10 @@ class NetworkManager {
             
             do {
             
-                let userResponse = try decoder.decode(UserResponse.self, from: data)
+                let pokemonResponse = try decoder.decode(PokemonResponse.self, from: data)
                 
-                self.delegate?.pokemonRetrieved(Pokemon: userResponse.data)
-                
+                self.delegate?.pokemonRetrieved(Pokemon: pokemonResponse.pokemon)
+                print(pokemonResponse)
             } catch {
                 print("Error decoding JSON: \(error)")
             }
