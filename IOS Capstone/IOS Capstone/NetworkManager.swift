@@ -7,7 +7,8 @@
 
 import Foundation
 protocol NetworkManagerDelegate: AnyObject {
-    func pokemonRetrieved(Pokemon: [Pokemon])
+    func pokemonRetrieved(pokemon: [Pokemon])
+    func detailsRetrieved(details: DetailsResponse)
 }
 class NetworkManager {
     static let shared = NetworkManager()
@@ -16,9 +17,43 @@ class NetworkManager {
     private init() {}
     
     var delegate: NetworkManagerDelegate?
-                                                  
+    
     func getPokemon() {
-        let endpoint = baseUrl + "pokemon/ditto"
+        let endpoint = baseUrl + "pokemon"
+        
+        guard let url = URL(string: endpoint) else {
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            
+            if let error = error {
+                print("Error: \(error)")
+                return
+            }
+            
+            guard let data = data else {
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            
+            do {
+                
+                let pokemonResponse = try decoder.decode(PokemonResponse.self, from: data)
+                
+                self.delegate?.pokemonRetrieved(pokemon: pokemonResponse.results)
+                print(pokemonResponse)
+            } catch {
+                print("Error decoding JSON: \(error)")
+            }
+        }
+        
+        task.resume()
+    }
+    func getDetails(name: String) {
+        let endpoint = baseUrl + "pokemon/\(name)"
         
         guard let url = URL(string: endpoint) else {
             return
@@ -40,10 +75,10 @@ class NetworkManager {
             
             do {
             
-                let pokemonResponse = try decoder.decode(PokemonResponse.self, from: data)
+                let detailsResponse = try decoder.decode(DetailsResponse.self, from: data)
                 
-                self.delegate?.pokemonRetrieved(Pokemon: pokemonResponse.pokemon)
-                print(pokemonResponse)
+                self.delegate?.detailsRetrieved(details: detailsResponse)
+                print(detailsResponse)
             } catch {
                 print("Error decoding JSON: \(error)")
             }
@@ -51,4 +86,6 @@ class NetworkManager {
         
         task.resume()
     }
+    
 }
+

@@ -9,6 +9,15 @@ import Foundation
 import UIKit
 
 class PokemonViewController: UIViewController, UITableViewDataSource, NetworkManagerDelegate, UITableViewDelegate {
+    func detailsRetrieved(details: DetailsResponse) {
+        DispatchQueue.main.async {
+            if let statsVC = self.storyboard?.instantiateViewController(withIdentifier: "StatsViewController") as? StatsViewController {
+                print("hello")
+                self.navigationController?.pushViewController(statsVC, animated: true)
+            }
+        }
+    }
+    
     
     @IBOutlet weak var pokemonList: UITableView!
     
@@ -17,22 +26,21 @@ class PokemonViewController: UIViewController, UITableViewDataSource, NetworkMan
         configureTableView()
         getPokemon()
     }
-
-    var pokemon: [Pokemon] = []
     
-    var pokemons = [String]()
+    var pokemon: [Pokemon] = []
     
     func getPokemon() {
         NetworkManager.shared.getPokemon()
         NetworkManager.shared.delegate = self
     }
     
-    func pokemonRetrieved(Pokemon: [Pokemon]) {
-        self.pokemon = Pokemon
-
-               DispatchQueue.main.async {
-                   self.pokemonList.reloadData()
-                   }
+    //we need a way to indentify when shomeone clicked on pokemon
+    func pokemonRetrieved(pokemon: [Pokemon]) {
+        self.pokemon = pokemon
+        print (pokemon)
+        DispatchQueue.main.async {
+            self.pokemonList.reloadData()
+        }
         
     }
     
@@ -49,17 +57,20 @@ class PokemonViewController: UIViewController, UITableViewDataSource, NetworkMan
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.PokemonReuseID, for: indexPath)
-        let categories = pokemons[indexPath.row]
+        let pokemon = pokemon[indexPath.row]
         var content = cell.defaultContentConfiguration()
-        content.text = categories
+        content.text = pokemon.name
         cell.contentConfiguration = content
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            tableView.deselectRow(at: indexPath, animated: true)
-        let statsVC = storyboard!.instantiateViewController(withIdentifier: "StatsViewController")
-            self.navigationController?.pushViewController(statsVC, animated: true)
-
+        tableView.deselectRow(at: indexPath, animated: true)
+        let selectedPokemon = pokemon[indexPath.row]
+        NetworkManager.shared.getDetails(name: selectedPokemon.name)
+        if let statsVC = storyboard?.instantiateViewController(withIdentifier: "StatsViewController") as? StatsViewController {
+            navigationController?.pushViewController(statsVC, animated: true)
         }
-    
     }
+    
+    
+}

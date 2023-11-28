@@ -3,4 +3,54 @@
    uuid = "EBEFD4A0-662E-43F9-AFCB-F80E5764D712"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "244D0674-E98D-4611-A43C-E035F963B7BD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IOS Capstone/PokemonViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "detailsRetrieved(details:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "244D0674-E98D-4611-A43C-E035F963B7BD - 576b9ab510f65d6e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in IOS_Pokemon_Capstone.PokemonViewController.detailsRetrieved(details: IOS_Pokemon_Capstone.DetailsResponse) -&gt; ()"
+                  moduleName = "IOS Pokemon Capstone"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/trevordunford/Desktop/IOS%20Capstone/IOS%20Capstone/PokemonViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "244D0674-E98D-4611-A43C-E035F963B7BD - 576b9ab510f65d6e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in IOS_Pokemon_Capstone.PokemonViewController.detailsRetrieved(details: IOS_Pokemon_Capstone.DetailsResponse) -&gt; ()"
+                  moduleName = "IOS Pokemon Capstone"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/trevordunford/Desktop/IOS%20Capstone/IOS%20Capstone/PokemonViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "448">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

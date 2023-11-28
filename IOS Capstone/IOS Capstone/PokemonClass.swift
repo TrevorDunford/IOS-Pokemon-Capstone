@@ -8,15 +8,33 @@
 import Foundation
 
 struct PokemonResponse: Codable {
-    let pokemon: [Pokemon]
+    let results: [Pokemon]
 }
-
+struct DetailsResponse: Codable {
+    let types: [TypeElement]
+    let moves: [Move]
+}
 struct Pokemon: Codable {
-    //let moves: Move?
-   let types: String?
+    let name: String
+    let url: String
 }
 
 struct Move: Codable {
-    let move: String?
-    let name: String?
+    let move: MoveDetails
+
+}
+
+struct MoveDetails: Codable {
+    let name: String
+    let url: String
+}
+
+struct TypeElement: Codable {
+    let slot: Int
+    let type: TypeDetails
+}
+
+struct TypeDetails: Codable {
+    let name: String
+    let url: String
 }
