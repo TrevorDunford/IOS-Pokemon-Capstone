@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class StatsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
     
     @IBOutlet weak var statsTableView: UITableView!
     
@@ -40,14 +40,28 @@ class StatsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.PokemonReuseID, for: indexPath)
-        let content = cell.defaultContentConfiguration()
-        //content.text =
+        var content = cell.defaultContentConfiguration()
         if indexPath.row == 0 {
-          var moves = detailsResponse!.moves
+            var moves = detailsResponse!.moves
+            var displayMoves = ""
             for move in moves {
-                print(move)
-
+                var name = move.move.name
+                displayMoves += "\(name), "
             }
+            print(displayMoves)
+            content.text = displayMoves
+            cell.contentConfiguration = content
+        }
+        if indexPath.row == 1 {
+            var types = detailsResponse!.types
+            var displayTypes = ""
+            for type in types {
+                var name = type.type.name
+                displayTypes += "\(name), "
+            }
+            print(displayTypes)
+            content.text = displayTypes
+            cell.contentConfiguration = content
         }
         
         //cell.contentConfiguration = content

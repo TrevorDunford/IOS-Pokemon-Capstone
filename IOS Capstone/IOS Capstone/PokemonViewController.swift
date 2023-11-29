@@ -67,9 +67,7 @@ class PokemonViewController: UIViewController, UITableViewDataSource, NetworkMan
         tableView.deselectRow(at: indexPath, animated: true)
         let selectedPokemon = pokemon[indexPath.row]
         NetworkManager.shared.getDetails(name: selectedPokemon.name)
-        if let statsVC = storyboard?.instantiateViewController(withIdentifier: "StatsViewController") as? StatsViewController {
-            navigationController?.pushViewController(statsVC, animated: true)
-        }
+        
     }
     
 }
