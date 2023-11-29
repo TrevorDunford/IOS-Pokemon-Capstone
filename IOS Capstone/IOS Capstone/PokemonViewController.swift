@@ -12,7 +12,7 @@ class PokemonViewController: UIViewController, UITableViewDataSource, NetworkMan
     func detailsRetrieved(details: DetailsResponse) {
         DispatchQueue.main.async {
             if let statsVC = self.storyboard?.instantiateViewController(withIdentifier: "StatsViewController") as? StatsViewController {
-                print("hello")
+                statsVC.detailsResponse = details
                 self.navigationController?.pushViewController(statsVC, animated: true)
             }
         }
@@ -71,6 +71,5 @@ class PokemonViewController: UIViewController, UITableViewDataSource, NetworkMan
             navigationController?.pushViewController(statsVC, animated: true)
         }
     }
-    
     
 }
